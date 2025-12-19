@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Giriş / Kayıt — Site Şikayet Yönetimi</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+
+<body>
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="inner">
+      <a class="brand" href="index.html">
+        <div class="logo"></div>
+        <div class="title">
+          <strong>Site Şikayet Yönetimi</strong>
+          <span>Şikayet • Takip • Çözüm</span>
+        </div>
+      </a>
+
+      <nav class="nav">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="auth.html" style="color: var(--text); background: rgba(15,23,42,0.05);">Giriş / Kayıt</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Auth Layout -->
+  <main class="auth-wrap">
+    <!-- Left hero -->
+    <section class="auth-hero">
+      <h1>Hoş geldiniz 👋</h1>
+      <p>
+        Site sakinleri şikayet oluşturur, yönetim ve personel süreci takip eder.
+        Daha hızlı çözüm için her şey tek panelde.
+      </p>
+
+      <div class="mini">
+        <span class="badge dot info">Şeffaf takip</span>
+        <span class="badge dot success">Hızlı çözüm</span>
+        <span class="badge dot warning">Öncelik yönetimi</span>
+        <span class="badge dot">Bildirimler</span>
+      </div>
+
+      <div style="height:16px;"></div>
+
+      <div class="card soft">
+        <div class="card-head">
+          <div>
+            <h2>Roller</h2>
+            <div class="sub">Kayıt olurken rol seçebilirsiniz</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="grid-2">
+            <div class="card" style="box-shadow:none;">
+              <div class="card-body">
+                <div class="badge dot info">Sakin</div>
+                <div class="hint" style="margin-top:10px;">
+                  Şikayet oluşturur, durumunu izler, çözüm sonrası değerlendirme yapar.
+                </div>
+              </div>
+            </div>
+            <div class="card" style="box-shadow:none;">
+              <div class="card-body">
+                <div class="badge dot success">Personel</div>
+                <div class="hint" style="margin-top:10px;">
+                  Kendisine atanan işleri görür, çözüm notu ekler, durumu günceller.
+                </div>
+              </div>
+            </div>
+            <div class="card" style="box-shadow:none;">
+              <div class="card-body">
+                <div class="badge dot warning">Yönetici</div>
+                <div class="hint" style="margin-top:10px;">
+                  Tüm şikayetleri yönetir, personel atar, raporları inceler, duyuru yayınlar.
+                </div>
+              </div>
+            </div>
+            <div class="card" style="box-shadow:none;">
+              <div class="card-body">
+                <div class="badge dot">Güvenlik</div>
+                <div class="hint" style="margin-top:10px;">
+                  Hesabınız yalnızca cihazınızda saklanır (demo). Veritabanına geçtiğimizde daha güvenli olacak.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right panel -->
+    <section class="auth-panel">
+      <div class="tabs">
+        <button id="tabLogin" class="tab active" type="button">Giriş Yap</button>
+        <button id="tabRegister" class="tab" type="button">Kayıt Ol</button>
+      </div>
+
+      <!-- LOGIN -->
+      <form id="loginForm" class="form">
+        <div class="field">
+          <div class="label">E-posta</div>
+          <input class="input" id="loginEmail" type="email" placeholder="ornek@site.com" required />
+        </div>
+
+        <div class="field">
+          <div class="label">Şifre</div>
+          <input class="input" id="loginPassword" type="password" placeholder="••••••••" required />
+          <div class="hint">Şifrenizi kimseyle paylaşmayın.</div>
+        </div>
+
+        <button class="btn primary block" type="submit">Giriş Yap</button>
+
+        <div class="hint">
+          Hesabınız yok mu?
+          <a href="#" id="toRegister" style="color: var(--primary-2); font-weight: 900;">Kayıt Ol</a>
+        </div>
+      </form>
+
+      <!-- REGISTER -->
+      <form id="registerForm" class="form" style="display:none;">
+        <div class="field">
+          <div class="label">Ad Soyad</div>
+          <input class="input" id="regName" type="text" placeholder="Adınız Soyadınız" required />
+        </div>
+
+        <div class="field">
+          <div class="label">E-posta</div>
+          <input class="input" id="regEmail" type="email" placeholder="ornek@site.com" required />
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <div class="label">Şifre</div>
+            <input class="input" id="regPassword" type="password" placeholder="En az 6 karakter" minlength="6" required />
+          </div>
+
+          <div class="field">
+            <div class="label">Şifre (Tekrar)</div>
+            <input class="input" id="regPassword2" type="password" placeholder="Tekrar girin" minlength="6" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="label">Rol</div>
+          <select class="select" id="regRole" required>
+            <option value="SAKIN">Sakin</option>
+            <option value="PERSONEL">Personel</option>
+            <option value="YONETICI">Yönetici</option>
+          </select>
+          <div class="hint">Gerçek sistemde yönetici rolü onay ile verilebilir (istersen ekleriz).</div>
+        </div>
+
+        <button class="btn primary block" type="submit">Kayıt Ol</button>
+
+        <div class="hint">
+          Zaten hesabınız var mı?
+          <a href="#" id="toLogin" style="color: var(--primary-2); font-weight: 900;">Giriş Yap</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <div class="footer">
+    <div class="container">
+      © <span id="year"></span> Site Şikayet Yönetimi — Tüm hakları saklıdır.
+    </div>
+  </div>
+
+  <!-- Toast area (optional) -->
+  <div class="toast-area" id="toastArea"></div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Tabs UI only (logic handled by auth.js too, but keep UI smooth)
+    const tabLogin = document.getElementById("tabLogin");
+    const tabRegister = document.getElementById("tabRegister");
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
+    const toRegister = document.getElementById("toRegister");
+    const toLogin = document.getElementById("toLogin");
+
+    function showLogin(){
+      tabLogin.classList.add("active");
+      tabRegister.classList.remove("active");
+      loginForm.style.display = "grid";
+      registerForm.style.display = "none";
+    }
+    function showRegister(){
+      tabRegister.classList.add("active");
+      tabLogin.classList.remove("active");
+      loginForm.style.display = "none";
+      registerForm.style.display = "grid";
+    }
+
+    tabLogin.addEventListener("click", showLogin);
+    tabRegister.addEventListener("click", showRegister);
+    toRegister.addEventListener("click", (e)=>{ e.preventDefault(); showRegister(); });
+    toLogin.addEventListener("click", (e)=>{ e.preventDefault(); showLogin(); });
+  </script>
+
+  <script src="assets/js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sakin Paneli — Site Şikayet Yönetimi</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+
+<body>
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="inner">
+      <a class="brand" href="index.html">
+        <div class="logo"></div>
+        <div class="title">
+          <strong>Site Şikayet Yönetimi</strong>
+          <span>Sakin Paneli</span>
+        </div>
+      </a>
+
+      <nav class="nav">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="resident.html" style="color: var(--text); background: rgba(15,23,42,0.05);">Panel</a>
+        <a href="auth.html?logout=1" id="btnLogout">Çıkış</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- App shell -->
+  <main class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="side-head">
+        <div class="who">
+          <strong id="whoName">—</strong>
+          <span id="whoMeta">Sakin</span>
+        </div>
+        <span class="badge dot info">SAKİN</span>
+      </div>
+
+      <nav class="side-nav">
+        <a class="active" href="resident.html">
+          Şikayetlerim
+          <span class="count" id="countAll">0</span>
+        </a>
+        <a href="#create">
+          Yeni Şikayet
+          <span class="count" id="countOpen">0</span>
+        </a>
+        <a href="#announcements">
+          Duyurular
+          <span class="count" id="annCount">0</span>
+        </a>
+        <a href="#help">
+          Yardım
+          <span class="count">?</span>
+        </a>
+      </nav>
+
+      <div style="height:10px;"></div>
+
+      <div class="card soft" style="box-shadow:none;">
+        <div class="card-body">
+          <div class="label">İpucu</div>
+          <div class="hint" style="margin-top:6px;">
+            Şikayetinize fotoğraf ekleme özelliğini istersen bir sonraki adımda ekleyebiliriz.
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <section class="main">
+      <!-- Page head -->
+      <div class="page-head">
+        <h1>Şikayetlerim</h1>
+        <p>Şikayet oluşturun, durumunu takip edin ve çözüm sonrası değerlendirme yapın.</p>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid-4">
+        <div class="card stat">
+          <div class="meta">
+            <div class="label">Toplam</div>
+            <div class="value" id="statTotal">0</div>
+          </div>
+          <div class="pill">Kayıt</div>
+        </div>
+
+        <div class="card stat">
+          <div class="meta">
+            <div class="label">Açık</div>
+            <div class="value" id="statOpen">0</div>
+          </div>
+          <div class="pill">Takip</div>
+        </div>
+
+        <div class="card stat">
+          <div class="meta">
+            <div class="label">Atandı</div>
+            <div class="value" id="statAssigned">0</div>
+          </div>
+          <div class="pill">Personel</div>
+        </div>
+
+        <div class="card stat">
+          <div class="meta">
+            <div class="label">Çözüldü / Kapandı</div>
+            <div class="value" id="statDone">0</div>
+          </div>
+          <div class="pill">Tamam</div>
+        </div>
+      </div>
+
+      <!-- Create ticket -->
+      <div class="card" id="create">
+        <div class="card-head">
+          <div>
+            <h2>Yeni Şikayet Oluştur</h2>
+            <div class="sub">Kısa ve net açıklama yazmanız çözümü hızlandırır.</div>
+          </div>
+          <span class="badge dot info">Form</span>
+        </div>
+
+        <div class="card-body">
+          <form id="ticketForm" class="form">
+            <div class="grid-2">
+              <div class="field">
+                <div class="label">Kategori</div>
+                <select id="category" class="select" required>
+                  <option value="">Seçiniz</option>
+                  <option value="Su Tesisatı">Su Tesisatı</option>
+                  <option value="Elektrik">Elektrik</option>
+                  <option value="Temizlik">Temizlik</option>
+                  <option value="Güvenlik">Güvenlik</option>
+                  <option value="Asansör">Asansör</option>
+                  <option value="Diğer">Diğer</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <div class="label">Öncelik</div>
+                <select id="priority" class="select" required>
+                  <option value="NORMAL">Normal</option>
+                  <option value="DUSUK">Düşük</option>
+                  <option value="YUKSEK">Yüksek</option>
+                  <option value="ACIL">Acil</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="label">Başlık</div>
+              <input id="title" class="input" type="text" placeholder="Örn: 3. blok merdiven ışığı çalışmıyor" required />
+            </div>
+
+            <div class="field">
+              <div class="label">Açıklama</div>
+              <textarea id="description" class="textarea" placeholder="Detayları yazınız (konum, saat, önemli notlar vb.)" required></textarea>
+              <div class="hint">Not: Maksimum 5MB dosya ekleyebilirsiniz.</div>
+            </div>
+
+            <div class="field">
+              <div class="label">Ek Dosya (Opsiyonel)</div>
+              <input id="attachment" class="input" type="file" accept=".png,.jpg,.jpeg,.pdf,.mp4" />
+              <div class="hint">Desteklenen: JPG/PNG/PDF/MP4</div>
+            </div>
+
+            <div class="row" style="justify-content:flex-end;">
+              <button class="btn" type="reset">Temizle</button>
+              <button class="btn primary" type="submit">Şikayet Gönder</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Filters + Table -->
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h2>Şikayet Listesi</h2>
+            <div class="sub">Filtrele, ara ve değerlendirme yap.</div>
+          </div>
+          <div class="filters">
+            <div class="search" title="Ara">
+              <span style="font-weight:900; color: var(--muted);">🔎</span>
+              <input id="searchInput" type="text" placeholder="Başlık / kategori / numara ile ara..." />
+            </div>
+
+            <select id="filterStatus" class="chip">
+              <option value="">Tüm Durumlar</option>
+              <option value="ACIK">Açık</option>
+              <option value="INCELEMEDE">İncelemede</option>
+              <option value="ATANDI">Atandı</option>
+              <option value="COZULDU">Çözüldü</option>
+              <option value="KAPANDI">Kapandı</option>
+              <option value="IPTAL">İptal</option>
+            </select>
+
+            <select id="filterCategory" class="chip">
+              <option value="">Tüm Kategoriler</option>
+              <option value="Su Tesisatı">Su Tesisatı</option>
+              <option value="Elektrik">Elektrik</option>
+              <option value="Temizlik">Temizlik</option>
+              <option value="Güvenlik">Güvenlik</option>
+              <option value="Asansör">Asansör</option>
+              <option value="Diğer">Diğer</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Başlık</th>
+                  <th>Kategori</th>
+                  <th>Öncelik</th>
+                  <th>Durum</th>
+                  <th>Tarih</th>
+                  <th>Değerlendirme</th>
+                  <th>İşlem</th>
+                </tr>
+              </thead>
+              <tbody id="ticketsTbody">
+                <!-- filled by JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <div id="emptyState" class="hint" style="margin-top:12px; display:none;">
+            Henüz şikayetiniz yok. Yukarıdan “Yeni Şikayet Oluştur” bölümünden başlayabilirsiniz.
+          </div>
+        </div>
+      </div>
+
+      <!-- Announcements -->
+      <div class="card" id="announcements">
+        <div class="card-head">
+          <div>
+            <h2>Duyurular</h2>
+            <div class="sub">Yönetici tarafından yayınlanan duyurular</div>
+          </div>
+          <span class="badge dot" id="annBadge">0</span>
+        </div>
+        <div class="card-body" id="annWrap">
+          <div class="hint">Yükleniyor...</div>
+        </div>
+      </div>
+
+      <!-- Help -->
+      <div class="card soft" id="help">
+        <div class="card-head">
+          <div>
+            <h2>Yardım</h2>
+            <div class="sub">Sık sorulanlar</div>
+          </div>
+          <span class="badge dot">SSS</span>
+        </div>
+        <div class="card-body">
+          <div class="grid-2">
+            <div>
+              <div class="label">Şikayetim ne zaman çözülür?</div>
+              <div class="hint" style="margin-top:6px;">
+                Öncelik ve yoğunluğa göre değişir. “Acil” şikayetler daha hızlı ele alınır.
+              </div>
+            </div>
+            <div>
+              <div class="label">Değerlendirme ne zaman yapılır?</div>
+              <div class="hint" style="margin-top:6px;">
+                Durum “Çözüldü” veya “Kapandı” olduğunda 1–5 yıldız verebilirsiniz.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="container">© <span id="year"></span> Site Şikayet Yönetimi</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast area -->
+  <div class="toast-area" id="toastArea"></div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="assets/js/resident.js"></script>
+</body>
+</html>

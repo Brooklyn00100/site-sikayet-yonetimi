@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Personel Paneli — Site Şikayet Yönetimi</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="inner">
+      <a class="brand" href="index.html">
+        <div class="logo"></div>
+        <div class="title">
+          <strong>Site Şikayet Yönetimi</strong>
+          <span>Personel Paneli</span>
+        </div>
+      </a>
+
+      <nav class="nav">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="staff.html" style="color: var(--text); background: rgba(15,23,42,0.05);">Panel</a>
+        <a href="auth.html?logout=1" id="btnLogout">Çıkış</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="app">
+    <aside class="sidebar">
+      <div class="side-head">
+        <div class="who">
+          <strong id="whoName">—</strong>
+          <span id="whoMeta">Personel</span>
+        </div>
+        <span class="badge dot success">PERSONEL</span>
+      </div>
+
+      <nav class="side-nav">
+        <a class="active" href="staff.html">
+          Bana Atananlar
+          <span class="count" id="countAssigned">0</span>
+        </a>
+        <a href="#work">
+          İşlem Yap
+          <span class="count">✓</span>
+        </a>
+        <a href="#help">
+          Yardım
+          <span class="count">?</span>
+        </a>
+      </nav>
+
+      <div style="height:10px;"></div>
+
+      <div class="card soft" style="box-shadow:none;">
+        <div class="card-body">
+          <div class="label">Not</div>
+          <div class="hint" style="margin-top:6px;">
+            Sadece size atanan şikayetler burada görünür. Atama işlemini Yönetici yapar.
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <section class="main">
+      <div class="page-head">
+        <h1>Bana Atanan Şikayetler</h1>
+        <p>Durumu güncelleyin, çözüm notu ekleyin ve işi tamamlayın.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card stat">
+          <div class="meta">
+            <div class="label">Toplam Atanan</div>
+            <div class="value" id="statTotal">0</div>
+          </div>
+          <div class="pill">Görev</div>
+        </div>
+
+        <div class="card stat">
+          <div class="meta">
+            <div class="label">Devam Eden</div>
+            <div class="value" id="statInProgress">0</div>
+          </div>
+          <div class="pill">Takip</div>
+        </div>
+
+        <div class="card stat">
+          <div class="meta">
+            <div class="label">Tamamlanan</div>
+            <div class="value" id="statDone">0</div>
+          </div>
+          <div class="pill">Bitti</div>
+        </div>
+      </div>
+
+      <div class="card" id="work">
+        <div class="card-head">
+          <div>
+            <h2>Liste</h2>
+            <div class="sub">Filtrele, ara, güncelle</div>
+          </div>
+
+          <div class="filters">
+            <div class="search" title="Ara">
+              <span style="font-weight:900; color: var(--muted);">🔎</span>
+              <input id="searchInput" type="text" placeholder="No / başlık / kategori ile ara..." />
+            </div>
+
+            <select id="filterStatus" class="chip">
+              <option value="">Tüm Durumlar</option>
+              <option value="ATANDI">Atandı</option>
+              <option value="INCELEMEDE">İncelemede</option>
+              <option value="COZULDU">Çözüldü</option>
+              <option value="KAPANDI">Kapandı</option>
+              <option value="IPTAL">İptal</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Başlık</th>
+                  <th>Kategori</th>
+                  <th>Öncelik</th>
+                  <th>Durum</th>
+                  <th>Tarih</th>
+                  <th>İşlem</th>
+                </tr>
+              </thead>
+              <tbody id="ticketsTbody"></tbody>
+            </table>
+          </div>
+
+          <div id="emptyState" class="hint" style="margin-top:12px; display:none;">
+            Şu an size atanmış şikayet bulunmuyor.
+          </div>
+        </div>
+      </div>
+
+      <div class="card soft" id="help">
+        <div class="card-head">
+          <div>
+            <h2>Yardım</h2>
+            <div class="sub">Sık sorulanlar</div>
+          </div>
+          <span class="badge dot">SSS</span>
+        </div>
+        <div class="card-body">
+          <div class="grid-2">
+            <div>
+              <div class="label">Hangi durumları güncelleyebilirim?</div>
+              <div class="hint" style="margin-top:6px;">
+                Atandı → İncelemede → Çözüldü. Yönetici isterse Kapandı yapabilir.
+              </div>
+            </div>
+            <div>
+              <div class="label">Çözüm notu nerede saklanıyor?</div>
+              <div class="hint" style="margin-top:6px;">
+                Bu sürümde tarayıcı verisinde (local). Veritabanına geçince kalıcı olacak.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="container">© <span id="year"></span> Site Şikayet Yönetimi</div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast-area" id="toastArea"></div>
+
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="assets/js/staff.js"></script>
+</body>
+</html>

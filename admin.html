@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yönetici Paneli — Site Şikayet Yönetimi</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="inner">
+      <a class="brand" href="index.html">
+        <div class="logo"></div>
+        <div class="title">
+          <strong>Site Şikayet Yönetimi</strong>
+          <span>Yönetici Paneli</span>
+        </div>
+      </a>
+
+      <nav class="nav">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="admin.html" style="color: var(--text); background: rgba(15,23,42,0.05);">Panel</a>
+        <a href="auth.html?logout=1" id="btnLogout">Çıkış</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="side-head">
+        <div class="who">
+          <strong id="whoName">—</strong>
+          <span id="whoMeta">Yönetici</span>
+        </div>
+        <span class="badge dot warning">YÖNETİCİ</span>
+      </div>
+
+      <nav class="side-nav">
+        <a class="active" href="#tickets">
+          Şikayet Yönetimi
+          <span class="count" id="countAll">0</span>
+        </a>
+        <a href="#analytics">
+          Analitik
+          <span class="count">📊</span>
+        </a>
+        <a href="#users">
+          Kullanıcılar
+          <span class="count" id="countUsers">0</span>
+        </a>
+        <a href="#announcements">
+          Duyurular
+          <span class="count" id="countAnn">0</span>
+        </a>
+      </nav>
+
+      <div style="height:10px;"></div>
+
+      <div class="card soft" style="box-shadow:none;">
+        <div class="card-body">
+          <div class="label">Hızlı Aksiyon</div>
+          <div class="hint" style="margin-top:6px;">
+            Şikayetleri “Personel Ata” ile yönlendirin ve statüleri güncelleyin.
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <section class="main">
+      <div class="page-head">
+        <h1>Yönetici Paneli</h1>
+        <p>Tüm şikayetleri yönetin, personel atayın, statüleri güncelleyin ve duyuru paylaşın.</p>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid-4">
+        <div class="card stat">
+          <div class="meta">
+            <div class="label">Toplam</div>
+            <div class="value" id="statTotal">0</div>
+          </div>
+          <div class="pill">Kayıt</div>
+        </div>
+        <div class="card stat">
+          <div class="meta">
+            <div class="label">Açık</div>
+            <div class="value" id="statOpen">0</div>
+          </div>
+          <div class="pill">Takip</div>
+        </div>
+        <div class="card stat">
+          <div class="meta">
+            <div class="label">Atandı</div>
+            <div class="value" id="statAssigned">0</div>
+          </div>
+          <div class="pill">İş Akışı</div>
+        </div>
+        <div class="card stat">
+          <div class="meta">
+            <div class="label">Çözüldü / Kapandı</div>
+            <div class="value" id="statDone">0</div>
+          </div>
+          <div class="pill">Tamam</div>
+        </div>
+      </div>
+
+      <!-- Tickets -->
+      <div class="card" id="tickets">
+        <div class="card-head">
+          <div>
+            <h2>Şikayet Yönetimi</h2>
+            <div class="sub">Filtrele • Ata • Statü güncelle</div>
+          </div>
+
+          <div class="filters">
+            <div class="search">
+              <span style="font-weight:900; color: var(--muted);">🔎</span>
+              <input id="searchInput" type="text" placeholder="No / başlık / kategori / kullanıcı ile ara..." />
+            </div>
+
+            <select id="filterStatus" class="chip">
+              <option value="">Tüm Durumlar</option>
+              <option value="ACIK">Açık</option>
+              <option value="INCELEMEDE">İncelemede</option>
+              <option value="ATANDI">Atandı</option>
+              <option value="COZULDU">Çözüldü</option>
+              <option value="KAPANDI">Kapandı</option>
+              <option value="IPTAL">İptal</option>
+            </select>
+
+            <select id="filterCategory" class="chip">
+              <option value="">Tüm Kategoriler</option>
+              <option value="Su Tesisatı">Su Tesisatı</option>
+              <option value="Elektrik">Elektrik</option>
+              <option value="Temizlik">Temizlik</option>
+              <option value="Güvenlik">Güvenlik</option>
+              <option value="Asansör">Asansör</option>
+              <option value="Diğer">Diğer</option>
+            </select>
+
+            <select id="filterAssignee" class="chip">
+              <option value="">Tüm Personel</option>
+              <!-- filled by JS -->
+            </select>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="label" style="font-weight:900;">Aktif Şikayetler</div>
+          <div style="height:8px;"></div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Başlık</th>
+                  <th>Kategori</th>
+                  <th>Öncelik</th>
+                  <th>Durum</th>
+                  <th>Oluşturan</th>
+                  <th>Atanan</th>
+                  <th>Tarih</th>
+                  <th>İşlem</th>
+                </tr>
+              </thead>
+              <tbody id="ticketsTbody"></tbody>
+            </table>
+          </div>
+
+          <div id="emptyState" class="hint" style="margin-top:12px; display:none;">
+            Kayıt bulunamadı. Filtreleri temizleyip tekrar deneyin.
+          </div>
+        </div>
+      </div>
+
+      <!-- Archive -->
+      <div class="card soft" id="archive">
+        <div class="card-head">
+          <div>
+            <h2>Arşiv (Tamamlanan)</h2>
+            <div class="sub">Çözüldü • Kapandı • İptal</div>
+          </div>
+          <span class="badge dot">Arşiv</span>
+        </div>
+        <div class="card-body">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Başlık</th>
+                  <th>Kategori</th>
+                  <th>Öncelik</th>
+                  <th>Durum</th>
+                  <th>Oluşturan</th>
+                  <th>Atanan</th>
+                  <th>Tarih</th>
+                  <th>İşlem</th>
+                </tr>
+              </thead>
+              <tbody id="ticketsArchiveTbody"></tbody>
+            </table>
+          </div>
+          <div id="emptyArchive" class="hint" style="margin-top:12px; display:none;">
+            Arşivde kayıt yok.
+          </div>
+        </div>
+      </div>
+
+      <!-- Analytics -->
+      <div class="card soft" id="analytics">
+        <div class="card-head">
+          <div>
+            <h2>Analitik</h2>
+            <div class="sub">Basit raporlar (demo)</div>
+          </div>
+          <span class="badge dot info">Rapor</span>
+        </div>
+        <div class="card-body">
+          <div class="grid-3">
+            <div class="card" style="box-shadow:none;">
+              <div class="card-body">
+                <div class="label">Kategori Dağılımı (Top 3)</div>
+                <div id="topCategories" class="hint" style="margin-top:10px;">—</div>
+              </div>
+            </div>
+            <div class="card" style="box-shadow:none;">
+              <div class="card-body">
+                <div class="label">Ortalama Çözüm Süresi</div>
+                <div id="avgResolution" class="hint" style="margin-top:10px;">—</div>
+              </div>
+            </div>
+            <div class="card" style="box-shadow:none;">
+              <div class="card-body">
+                <div class="label">SLA (48 saat içinde çözülen)</div>
+                <div id="sla48" class="hint" style="margin-top:10px;">—</div>
+              </div>
+            </div>
+          </div>
+          <div style="height:10px;"></div>
+          <div class="grid-3">
+            <div class="card" style="box-shadow:none;">
+              <div class="card-body">
+                <div class="label">Geciken Kayıt (48s+)</div>
+                <div id="reportOverdue" class="hint" style="margin-top:10px;">—</div>
+              </div>
+            </div>
+            <div class="card" style="box-shadow:none;">
+              <div class="card-body">
+                <div class="label">SLA Başarı Oranı</div>
+                <div id="reportSlaRate" class="hint" style="margin-top:10px;">—</div>
+              </div>
+            </div>
+            <div class="card" style="box-shadow:none;">
+              <div class="card-body">
+                <div class="label">Toplam SLA Örneği</div>
+                <div id="reportSlaTotal" class="hint" style="margin-top:10px;">—</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Users -->
+      <div class="card" id="users">
+        <div class="card-head">
+          <div>
+            <h2>Kullanıcı Yönetimi</h2>
+            <div class="sub">Hesapları aktif/pasif yapabilirsiniz</div>
+          </div>
+          <span class="badge dot warning">Erişim</span>
+        </div>
+        <div class="card-body">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Ad Soyad</th>
+                  <th>E-posta</th>
+                  <th>Rol</th>
+                  <th>Durum</th>
+                  <th>İşlem</th>
+                </tr>
+              </thead>
+              <tbody id="usersTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Staff -->
+      <div class="card soft" id="topStaff">
+        <div class="card-head">
+          <div>
+            <h2>En İyi Personel</h2>
+            <div class="sub">Sakin değerlendirmelerine göre</div>
+          </div>
+          <span class="badge dot success">Skor</span>
+        </div>
+        <div class="card-body" id="topStaffWrap">
+          <div class="hint">Yükleniyor...</div>
+        </div>
+      </div>
+
+      <!-- Announcements -->
+      <div class="card" id="announcements">
+        <div class="card-head">
+          <div>
+            <h2>Duyurular</h2>
+            <div class="sub">Site sakinleri için bilgilendirme</div>
+          </div>
+          <span class="badge dot">Duyuru</span>
+        </div>
+
+        <div class="card-body">
+          <form id="annForm" class="form">
+            <div class="grid-2">
+              <div class="field">
+                <div class="label">Başlık</div>
+                <input class="input" id="annTitle" type="text" placeholder="Örn: Asansör bakım çalışması" required />
+              </div>
+              <div class="field">
+                <div class="label">Yayın Süresi</div>
+                <select class="select" id="annExpiry">
+                  <option value="24">24 Saat</option>
+                  <option value="48" selected>48 Saat</option>
+                </select>
+                <div class="hint">Süre dolunca duyuru görünmez.</div>
+              </div>
+            </div>
+            <div class="field">
+              <div class="label">İçerik</div>
+              <textarea class="textarea" id="annBody" placeholder="Duyuru metnini yazınız..." required></textarea>
+              <div class="hint">Duyuru yayınlandığında ana sayfada/панелях gösterebiliriz (istersen ekleriz).</div>
+            </div>
+            <div class="field">
+              <div class="label">Fotoğraf (Opsiyonel)</div>
+              <input class="input" id="annImage" type="file" accept=".png,.jpg,.jpeg" />
+              <div class="hint">Maksimum 5MB (JPG/PNG)</div>
+            </div>
+            <div class="row" style="justify-content:flex-end;">
+              <button class="btn primary" type="submit">Duyuru Yayınla</button>
+            </div>
+          </form>
+
+          <div style="height:14px;"></div>
+
+          <div class="card soft" style="box-shadow:none;">
+            <div class="card-head">
+              <div>
+                <h2>Yayınlanan Duyurular</h2>
+                <div class="sub">Son 10 duyuru</div>
+              </div>
+              <span class="badge dot" id="annBadge">0</span>
+            </div>
+            <div class="card-body" id="annList" class="col">
+              <!-- filled by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="container">© <span id="year"></span> Site Şikayet Yönetimi</div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast-area" id="toastArea"></div>
+
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Site Şikayet Yönetimi</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+
+<body>
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="inner">
+      <a class="brand" href="index.html">
+        <div class="logo"></div>
+        <div class="title">
+          <strong>Site Şikayet Yönetimi</strong>
+          <span>Şikayet • Takip • Çözüm</span>
+        </div>
+      </a>
+
+      <nav class="nav" id="navArea">
+        <a href="#features">Özellikler</a>
+        <a href="#how">Nasıl Çalışır?</a>
+        <a href="#ann">Duyurular</a>
+        <a href="auth.html" id="navAuth">Giriş / Kayıt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section style="padding: 34px 0 18px;">
+      <div class="card soft" style="overflow:hidden;">
+        <div class="card-body">
+          <div class="grid-2" style="align-items:center;">
+            <div>
+              <div class="badge dot info">Profesyonel Yönetim</div>
+              <h1 style="margin:12px 0 0; font-size:36px; letter-spacing:-0.04em;">
+                Şikayetlerinizi tek yerden yönetin.
+              </h1>
+              <p style="margin:10px 0 0; color: var(--muted); font-weight:650; max-width: 56ch;">
+                Site sakinleri şikayet oluşturur, yönetim personel atar, süreç şeffaf şekilde takip edilir.
+                Çözüm sonrası değerlendirme ile kalite ölçülür.
+              </p>
+
+              <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+                <a class="btn primary" href="auth.html" id="ctaMain">Giriş Yap / Kayıt Ol</a>
+                <a class="btn" href="#ann">Duyuruları Gör</a>
+              </div>
+
+              <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+                <span class="badge dot">Rol bazlı paneller</span>
+                <span class="badge dot success">Hızlı çözüm</span>
+                <span class="badge dot warning">Öncelik yönetimi</span>
+                <span class="badge dot info">Analitik raporlar</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="grid-2">
+                <div class="card" style="box-shadow:none;">
+                  <div class="card-body">
+                    <div class="label">Sakin</div>
+                    <div style="font-weight:950; margin-top:6px;">Şikayet Oluştur</div>
+                    <div class="hint" style="margin-top:6px;">Başlık, kategori ve açıklama ile kayıt aç.</div>
+                  </div>
+                </div>
+                <div class="card" style="box-shadow:none;">
+                  <div class="card-body">
+                    <div class="label">Yönetici</div>
+                    <div style="font-weight:950; margin-top:6px;">Atama & Kontrol</div>
+                    <div class="hint" style="margin-top:6px;">Personel ata, durumu yönet, duyuru paylaş.</div>
+                  </div>
+                </div>
+                <div class="card" style="box-shadow:none;">
+                  <div class="card-body">
+                    <div class="label">Personel</div>
+                    <div style="font-weight:950; margin-top:6px;">Çözüm Süreci</div>
+                    <div class="hint" style="margin-top:6px;">Kendine atanan işleri gör, çözümle, not ekle.</div>
+                  </div>
+                </div>
+                <div class="card" style="box-shadow:none;">
+                  <div class="card-body">
+                    <div class="label">Kalite</div>
+                    <div style="font-weight:950; margin-top:6px;">Değerlendirme</div>
+                    <div class="hint" style="margin-top:6px;">Çözüm sonrası 1–5 yıldız ile puanla.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="height:12px;"></div>
+
+              <div class="card" style="box-shadow:none;">
+                <div class="card-body">
+                  <div class="label">Not</div>
+                  <div class="hint" style="margin-top:6px;">
+                    Bu sürüm resmi: veriler SQLite veritabanında saklanır (localStorage değil).
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="page-head">
+      <h1 style="font-size:26px;">Özellikler</h1>
+      <p>Temel ihtiyaçlar + profesyonel görünüm + ölçeklenebilir yapı.</p>
+    </section>
+
+    <section class="grid-3">
+      <div class="card">
+        <div class="card-head">
+          <h2>Şikayet Takibi</h2>
+          <div class="sub">Durum, kategori, öncelik</div>
+        </div>
+        <div class="card-body">
+          <div class="hint">
+            Açık → İncelemede → Atandı → Çözüldü / Kapandı akışı ile net takip.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2>Personel Atama</h2>
+          <div class="sub">Yönetici kontrolünde</div>
+        </div>
+        <div class="card-body">
+          <div class="hint">
+            Yönetici panelinden personel atayarak iş yükünü dengeli dağıt.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2>Analitik</h2>
+          <div class="sub">Kategori / SLA / süre</div>
+        </div>
+        <div class="card-body">
+          <div class="hint">
+            En yoğun kategoriler, ortalama çözüm süresi ve SLA performansı.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how" class="page-head" style="margin-top:6px;">
+      <h1 style="font-size:26px;">Nasıl Çalışır?</h1>
+      <p>3 adımda süreç.</p>
+    </section>
+
+    <section class="grid-3">
+      <div class="card soft">
+        <div class="card-body">
+          <div class="badge dot info">1</div>
+          <div style="font-weight:950; margin-top:10px;">Sakin Şikayet Oluşturur</div>
+          <div class="hint" style="margin-top:6px;">
+            Başlık, kategori, açıklama ve öncelik seçimi ile kayıt açılır.
+          </div>
+        </div>
+      </div>
+
+      <div class="card soft">
+        <div class="card-body">
+          <div class="badge dot warning">2</div>
+          <div style="font-weight:950; margin-top:10px;">Yönetici Atar ve Yönlendirir</div>
+          <div class="hint" style="margin-top:6px;">
+            Uygun personele atama yapar, durumları yönetir.
+          </div>
+        </div>
+      </div>
+
+      <div class="card soft">
+        <div class="card-body">
+          <div class="badge dot success">3</div>
+          <div style="font-weight:950; margin-top:10px;">Personel Çözer, Sakin Değerlendirir</div>
+          <div class="hint" style="margin-top:6px;">
+            Çözüm sonrası sakin 1–5 yıldız puan verir.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ANNOUNCEMENTS -->
+    <section id="ann" class="page-head" style="margin-top:8px;">
+      <h1 style="font-size:26px;">Duyurular</h1>
+      <p>Yönetici tarafından yayınlanan son duyurular.</p>
+    </section>
+
+    <section class="card" style="margin-bottom: 18px;">
+      <div class="card-head">
+        <div>
+          <h2>Son Duyurular</h2>
+          <div class="sub">En fazla 5 kayıt gösterilir</div>
+        </div>
+        <span class="badge dot" id="annCount">0</span>
+      </div>
+      <div class="card-body" id="annWrap">
+        <div class="hint">Yükleniyor...</div>
+      </div>
+    </section>
+
+    <div class="footer">
+      <div class="container">
+        © <span id="year"></span> Site Şikayet Yönetimi
+      </div>
+    </div>
+  </main>
+
+  <!-- ✅ API-based script -->
+  <script src="assets/js/index.js"></script>
+</body>
+</html>
