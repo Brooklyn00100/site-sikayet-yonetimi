@@ -1,18 +1,5 @@
 # Site Sikayet Yonetimi (Realtime + SQLite)
 
-## Kurulum
-
-```bash
-cd backend
-npm install
-npm run dev
-```
-
-Tarayicida acin:
-
-- http://localhost:3000/index.html
-- http://localhost:3000/auth.html
-
 ## Notlar
 
 - Veritabani dosyasi: `backend/data/ssy.db`
